@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: usersservice
+server:
+  port: 8080
+
+data-sources:
+  dataSources:
+    - name: Db
+      strategy: postgresql
+      url: jdbc:postgresql://127.0.0.1:5432/Db
+      table: users
+      user: postgres
+      password: postgres
+      mapping:
+        user_id: user_id
+        username: root
+        name: first_name
+        lastname: last_name
+#    - name: data-base-2
+#      strategy: postgres
+#      url: jdbc:postgresql://localhost:5432/db2
+#      table: user_table
+#      user: testuser
+#      password: testpass
+#      mapping:
+#        id: ldap_login
+#        username: ldap_login
+#        name: name
+#        lastname: lastname
+
+
+#data-sources:
+#  - name: database1
+#    strategy: postgresql
+#    url: jdbc:postgresql://localhost:5432/db1
+#    table: users
+#    user: postgres
+#    password: postgres
+#    mapping:
+#      id: user_id
+#      username: login
+#      name: first_name
+#      surname: last_name
+#  - name: database2
+#    strategy: postgres
+#    url: jdbc:postgresql://localhost:5432/db2
+#    table: user_table
+#    user: root
+#    password: root
+#    mapping:
+#      id: ldap_login
+#      username: ldap_login
+#      name: name
+#      surname: surname
+#  - name: database3
+#    strategy: postgres
+#    url: jdbc:postgresql://localhost:5432/db2
+#    table: user_table
+#    user: root
+#    password: root
+#    mapping:
+#      id: ldap_login
+#      username: ldap_login
+#      name: name
+#      surname: surname

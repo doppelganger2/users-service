@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest
-class UsersserviceApplicationTests {
+class UsersServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
