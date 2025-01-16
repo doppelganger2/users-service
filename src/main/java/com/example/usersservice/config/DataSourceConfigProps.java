@@ -5,22 +5,22 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "data-sources")
+@ConfigurationProperties("data-sources.data")
 public class DataSourceConfigProps {
-    private List<DataSourceProperties> dataSources;
+    private List<DataSource> dataSources;
 
     @Data
-    public static class DataSourceProperties {
+    public static class DataSource {
         private String name;
         private String strategy;
         private String url;
         private String table;
         private String user;
         private String password;
-        private Map<String, String> mapping;
+        private List<String> mapping;
     }
 }
+

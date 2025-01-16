@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: usersservice
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+
+data-sources:
+  - name: postgres-db
+    strategy: postgresql
+    url: ${DATASOURCE_POSTGRES_URL}
+    table: users
+    user: ${DATASOURCE_POSTGRES_USERNAME}
+    password: ${DATASOURCE_POSTGRES_PASSWORD}
+    mapping:
+      user_id,
+      username,
+      name,
+      lastname
+  - name: mysql-db
+    strategy: mysql
+    url: ${DATASOURCE_MYSQL_URL}
+    table: users
+    user: ${DATASOURCE_MYSQL_USERNAME}
+    password: ${DATASOURCE_MYSQL_PASSWORD}
+    mapping:
+      user_id,
+      username,
+      name,
+      lastname
+  - name: mariadb-db
+    strategy: mariadb
+    url: ${DATASOURCE_MARIADB_URL}
+    table: users
+    user: ${DATASOURCE_MARIADB_USERNAME}
+    password: ${DATASOURCE_MARIADB_PASSWORD}
+    mapping:
+      user_id,
+      username,
+      name,
+      lastname

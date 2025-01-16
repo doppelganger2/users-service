@@ -1,9 +1,11 @@
 package com.example.usersservice.util;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.UUID;
 
+@UtilityClass
 public class UserDatabaseUtil {
 
     private static final String CREATE_DATABASE_SQL = "CREATE DATABASE IF NOT EXISTS Db";
@@ -16,7 +18,6 @@ public class UserDatabaseUtil {
     private static final String INSERT_USER_SQL = "INSERT INTO users (user_id, username, name, lastname) VALUES (?, ?, ?, ?)";
 
     public static void initializeDatabase(JdbcTemplate jdbcTemplate) {
-        // Create database
         try {
             jdbcTemplate.execute(CREATE_DATABASE_SQL);
             jdbcTemplate.execute(CREATE_DATABASE_SQL);
@@ -24,19 +25,13 @@ public class UserDatabaseUtil {
             System.out.println("Database creation failed or already exists: " + e.getMessage());
         }
 
-        // Switch to the newly created database (if required by the DBMS)
-//        if (jdbcTemplate.getDataSource() instanceof DriverManagerDataSource) {}
-//        jdbcTemplate.execute("USE Db");  // This line is specific to databases like MySQL
-
-        // Create table
         jdbcTemplate.execute(CREATE_TABLE_SQL);
 
-        // Insert mock data
         for (int i = 1; i <= 10; i++) {
             String userId = UUID.randomUUID().toString();
             String username = "user" + i;
             String name = "Name" + i;
-            String lastname = "Surname" + i;
+            String lastname = "Lastname" + i;
             jdbcTemplate.update(INSERT_USER_SQL, userId, username, name, lastname);
         }
 

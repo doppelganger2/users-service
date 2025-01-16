@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: ${PG_CONTAINER_NAME}
+    environment:
+      POSTGRES_DB: ${PG_DB}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    ports:
+      - "5432:5432"
+
+  mysql:
+    image: mysql:latest
+    container_name: ${MYSQL_CONTAINER_NAME}
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
+    ports:
+      - "3306:3306"
+
+  mariadb:
+    image: mariadb:latest
+    container_name: ${MARIADB_CONTAINER_NAME}
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DB}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASS}
+    ports:
+      - "3307:3306"
+
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: user-service:local
+    container_name: user-service
+    depends_on:
+      - postgres
+      - mysql
+      - mariadb
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DATASOURCE_POSTGRES_URL: jdbc:postgresql://${PG_CONTAINER_NAME}:5432/${PG_DB}
+      DATASOURCE_POSTGRES_USERNAME: ${PG_USER}
+      DATASOURCE_POSTGRES_PASSWORD: ${PG_PASSWORD}
+      DATASOURCE_MYSQL_URL: jdbc:mysql://${MYSQL_CONTAINER_NAME}:3306/${MYSQL_DB}
+      DATASOURCE_MYSQL_USERNAME: ${MYSQL_USER}
+      DATASOURCE_MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      DATASOURCE_MARIADB_URL: jdbc:mariadb://${MARIADB_CONTAINER_NAME}:3306/${MARIADB_DB}
+      DATASOURCE_MARIADB_USERNAME: ${MARIADB_USER}
+      DATASOURCE_MARIADB_PASSWORD: ${MARIADB_PASSWORD}

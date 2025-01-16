@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: usersservice
+server:
+  port: 8080
+
+data-sources:
+  dataSources:
+    - name: postgresDb1
+      strategy: postgresql
+      url: jdbc:postgresql://localhost:5432/testdb
+      table: users
+      user: testuser
+      password: testpass
+      mapping:
+        user_id: user_id
+        username: johnny123
+        name: firstname
+        lastname: lastname
